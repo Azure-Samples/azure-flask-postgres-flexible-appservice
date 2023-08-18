@@ -1,0 +1,17 @@
+[project]
+name = "flaskapp"
+version = "1.0.0"
+description = "Create a relecloud demo application with flask and postgres-flexible"
+dependencies = [
+    "Flask==2.3.2",
+    "Flask-Migrate==4.0.4",
+    "Flask-SQLAlchemy==3.0.5",
+    "opencensus-ext-azure==1.1.9",
+    "opencensus-ext-flask==0.8.2",
+    "psycopg2-binary==2.9.6",
+    "SQLAlchemy==2.0.17"
+]
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"

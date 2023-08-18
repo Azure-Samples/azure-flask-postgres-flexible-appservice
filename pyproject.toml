@@ -1,0 +1,17 @@
+[tool.ruff]
+line-length = 120
+select = ["E", "F", "I", "UP"]
+ignore = ["D203"]
+
+[tool.ruff.isort]
+known-first-party = ["flaskapp"]
+
+[tool.black]
+line-length = 120
+extend-exclude = "migrations"
+
+[tool.pytest.ini_options]
+addopts = "-ra --cov -vv"
+
+[tool.coverage.report]
+show_missing = true

@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: azure-flask-postgres-flexible-aca
+metadata:
+    template: azure-flask-postgres-flexible-aca
+infra:
+    provider: "bicep"
+services:
+    web:
+        project: src 
+        language: py
+        host: appservice
+
