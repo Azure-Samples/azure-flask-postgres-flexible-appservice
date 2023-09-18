@@ -77,7 +77,6 @@ module web 'web.bicep' = {
     location: location
     tags: tags
     applicationInsightsName: monitoring.outputs.applicationInsightsName
-    identityName: '${prefix}-id-web'
     keyVaultName: keyVault.outputs.name
     appCommandLine: 'entrypoint.sh'
     pythonVersion: '3.11'
