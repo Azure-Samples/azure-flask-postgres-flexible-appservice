@@ -5,11 +5,7 @@
 
     // Update the 'dockerComposeFile' list if you have more compose files or use different names.
     // The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
-    "dockerComposeFile": [
-        "../docker-compose.yml",
-        "docker-compose_dev.yml" // Overwrites portions of the prod compose file
-    ],
-
+    "dockerComposeFile": "docker-compose_dev.yml",
     // The 'service' property is the name of the service for the container that VS Code should
     // use. Update this value and .devcontainer/docker-compose.yml to the real service name.
     "service": "app",
@@ -18,7 +14,7 @@
     "forwardPorts": [8000, 5432],
     "portsAttributes": {
         "8000": {"label": "frontend web port", "onAutoForward": "notify"},
-        "5432": {"label": "PostgreSQL port", "onAutoForward": "silent"}
+        "5432": {"label": "PostgreSQL Port", "onAutoForward": "silent"}
     },
     "customizations": {
         "vscode": {
@@ -29,9 +25,9 @@
                 "ms-python.black-formatter",
                 "microsoft.bicep",
                 "bierner.github-markdown-preview",
-                "ms-azuretools.vscode-docker",
                 "mtxr.sqltools",
-                "mtxr.sqltools-driver-pg"
+                "mtxr.sqltools-driver-pg",
+                "ms-azuretools.vscode-docker"
             ],
             "settings": {
                 "sqltools.connections": [
@@ -51,5 +47,7 @@
     "features": {
         "ghcr.io/azure/azure-dev/azd:latest": {},
     },
-    "postCreateCommand": "pip install -e src && python3 -m flask --app src/flaskapp db upgrade --directory src/flaskapp/migrations && python3 -m flask --app src/flaskapp seed --filename src/seed_data.json"
+    "postCreateCommand": "pip install -r requirements-dev.in && pip install -e src && python3 -m flask --app src/flaskapp db upgrade --directory src/flaskapp/migrations && python3 -m flask --app src/flaskapp seed --filename src/seed_data.json"
+
 }
+

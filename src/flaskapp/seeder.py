@@ -1,15 +1,21 @@
+"""
+Seeder module for the PostgreSQL database.
+"""
 import json
 
 from . import models
 
 
-def seed_data(db, filename):
+def seed_data(db, filename: str) -> None:
+    """Uses the JSON file to populate the database"""
     with open(filename) as f:
         data = json.load(f)
         session = db.session
+
         for entry in data:
             if entry["model"] == "relecloud.destination":
                 destination = session.get(models.Destination, entry["pk"])
+
                 if destination is None:
                     destination = models.Destination(
                         name=entry["fields"]["name"],
@@ -27,9 +33,7 @@ def seed_data(db, filename):
                     for destination_id in entry["fields"]["destinations"]:
                         destination = session.get(models.Destination, destination_id)
                         if destination is None:
-                            raise Exception(
-                                f"Destination with id {destination_id} not found"
-                            )
+                            raise Exception(f"Destination with id {destination_id} not found")
                         destinations.append(destination)
 
                     cruise = models.Cruise(
