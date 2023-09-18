@@ -84,7 +84,6 @@ module web 'web.bicep' = {
     dbserverDomainName: db.outputs.dbserverDomainName
     dbserverUser: db.outputs.dbserverUser
     dbserverDatabaseName: db.outputs.dbserverDatabaseName
-    dbserverPassword: dbserverPassword
   }
 }
 
