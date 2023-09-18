@@ -23,11 +23,9 @@
                 "charliermarsh.ruff",
                 "ms-python.python",
                 "ms-python.black-formatter",
-                "microsoft.bicep",
-                "bierner.github-markdown-preview",
                 "mtxr.sqltools",
                 "mtxr.sqltools-driver-pg",
-                "ms-azuretools.vscode-docker"
+                "bierner.github-markdown-preview"
             ],
             "settings": {
                 "sqltools.connections": [
