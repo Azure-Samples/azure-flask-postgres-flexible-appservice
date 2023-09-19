@@ -13,8 +13,7 @@ def app():
     config_override = {
         "TESTING": True,
         "SQLALCHEMY_DATABASE_URI": os.environ.get(
-            "TEST_DATABASE_URL",
-            "postgresql://postgres:postgres@localhost:5432/postgres",
+            "TEST_DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/postgres"
         ),
     }
     app = create_app(config_override)

@@ -1,3 +1,6 @@
+# Deploy Flask Application with PostgreSQL via Azure Container Apps
+
+This project deploys a web application for a space travel agency using Flask. The application can be deployed to Azure with Azure App Service using the [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview).
 
 ## Opening the project
 
@@ -26,8 +29,7 @@ If you're not using one of those options for opening the project, then you'll ne
     ```sh
     python3 -m flask --app src.flaskapp db upgrade --directory src/flaskapp/migrations
     python3 -m flask --app src.flaskapp seed --filename src/seed_data.json
-```
-
+    ```
 
 ## Running locally
 
@@ -54,7 +56,7 @@ python3 -m gunicorn 'src.flaskapp:create_app()' -c src/gunicorn.conf.py
 
 ## Deployment
 
-This repo is set up for deployment on [Azure Container Apps](https://learn.microsoft.com/azure/container-apps/overview) using the `Dockerfile` and the configuration files in the `infra` folder.
+This repo is set up for deployment on Azure via Azure App Service.
 
 Steps for deployment:
 
@@ -91,3 +93,4 @@ to be stored as Github action secrets. To set that up, run:
 ```shell
 azd pipeline config
 ```
+
