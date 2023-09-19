@@ -38,7 +38,15 @@
                         "username": "postgres",
                         "password": "postgres"
                     }
-                ]
+                ],
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "python.testing.pytestEnabled": true,
+                "python.testing.unittestEnabled": false,
+                "files.exclude": {
+                    ".coverage": true,
+                    ".pytest_cache": true,
+                    "__pycache__": true
+                }
             }
         }
     },
