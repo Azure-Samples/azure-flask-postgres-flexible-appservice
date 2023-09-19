@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/kjaymiller/cookiecutter-relecloud",
-  "commit": "c1d45cdd9e0cd11bc388076c4ae4b443d4c7be74",
+  "commit": "97830512d665f6336d13aeb1e1c0a30318b8512d",
   "checkout": "update-appservice-dv",
   "context": {
     "cookiecutter": {
