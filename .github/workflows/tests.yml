@@ -36,11 +36,12 @@ jobs:
             python -m pip install --upgrade pip
             python -m pip install -r requirements-dev.in
             python -m pip install -e src
+            playwright install --with-deps
+        - name: Seed data and run Pytest tests
+          run: |
             python3 -m flask --app src.flaskapp db upgrade --directory src/flaskapp/migrations
             python3 -m flask --app src.flaskapp seed --filename src/seed_data.json
-            playwright install --with-deps
-        - name: Run Pytest tests
-          run: python -m pytest
+            python -m pytest 
           env:
             POSTGRES_HOST: db
             POSTGRES_USERNAME: postgres
