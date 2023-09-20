@@ -13,14 +13,14 @@ If you're not using one of those options for opening the project, then you'll ne
 1. Install production requirements:
 
     ```sh
-    python -m pip install -r src/requirements.txt
+    python3 -m pip install -r src/requirements.txt
     ```
 
 
 1. Install the app as an editable package:
 
     ```sh
-    python -m pip install -e src
+    python3 -m pip install -e src
     ```
 
 
