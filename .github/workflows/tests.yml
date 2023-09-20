@@ -33,13 +33,13 @@ jobs:
             architecture: x64
         - name: Install dependencies
           run: |
-            python3 -m pip install --upgrade pip
-            python3 -m pip install -r requirements-dev.txt
+            python -m pip install --upgrade pip
+            python -m pip install -r requirements-dev.in
             playwright install --with-deps
         - name: Run Pytest tests
-          run: python3 -m pytest -s
+          run: python -m pytest -s
           env:
-            DBHOST: localhost
+            DBHOST: db
             DBUSER: postgres
             DBPASS: postgres
-            DBNAME: postgres
+            DBNAME: relecloud
