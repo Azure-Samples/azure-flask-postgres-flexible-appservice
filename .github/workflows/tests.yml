@@ -43,7 +43,7 @@ jobs:
             python3 -m flask --app src.flaskapp seed --filename src/seed_data.json
             python -m pytest 
           env:
-            POSTGRES_HOST: db
+            POSTGRES_HOST: localhost
             POSTGRES_USERNAME: postgres
             POSTGRES_PASSWORD: postgres
-            POSTGRES_DATABASE: relecloud
+            POSTGRES_DATABASE: postgres
