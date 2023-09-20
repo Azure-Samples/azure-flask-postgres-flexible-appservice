@@ -42,7 +42,7 @@ jobs:
         - name: Run Pytest tests
           run: python -m pytest
           env:
-            DBHOST: db
-            DBUSER: postgres
-            DBPASS: postgres
-            DBNAME: relecloud
+            POSTGRES_HOST: db
+            POSTGRES_USERNAME: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DATABASE: relecloud
