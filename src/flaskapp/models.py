@@ -1,3 +1,7 @@
+"""
+Models for PostgreSQL
+
+"""
 from typing import List, Optional
 
 from sqlalchemy import Column, ForeignKey, String
