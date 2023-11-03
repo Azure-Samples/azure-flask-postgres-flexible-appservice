@@ -54,6 +54,5 @@
         "ghcr.io/azure/azure-dev/azd:latest": {},
     },
     "postCreateCommand": "pip install -r requirements-dev.in && pip install -e src && python3 -m flask --app src/flaskapp db upgrade --directory src/flaskapp/migrations && python3 -m flask --app src/flaskapp seed --filename src/seed_data.json"
-
 }
 
