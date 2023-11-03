@@ -15,7 +15,7 @@
             },
             "args": [
                 "run",
-                "--port=50505",
+                "--port=8000",
                 "--no-debugger",
                 "--reload"
             ],
