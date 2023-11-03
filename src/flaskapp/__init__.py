@@ -49,7 +49,7 @@ def create_app(test_config=None):
 
     @app.cli.command("seed")
     @click.option("--filename", default="seed_data.json")
-    def seed_data(filename, drop):
+    def seed_data(filename):
         from . import seeder
 
         seeder.seed_data(db, filename)
