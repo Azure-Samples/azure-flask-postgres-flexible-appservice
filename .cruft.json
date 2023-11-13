@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/kjaymiller/cookiecutter-relecloud",
-  "commit": "d507bca0f2f67be7274add230496456327acef14",
+  "commit": "06f8d5c23f34588ba5c0ea173ce1e65d3671b96f",
   "checkout": null,
   "context": {
     "cookiecutter": {
