@@ -4,6 +4,7 @@ import os
 
 import pytest
 
+# Import only the tests that we want to run for smoke testing
 from .test_playwright import (
     test_about,
     test_destination_options_have_cruises,
@@ -13,6 +14,15 @@ from .test_playwright import (
 )
 
 
+def pytest_addoption(parser):
+    parser.addoption(
+        "--live-server-url",
+        action="store",
+        default="http://localhost:8000",
+        help="URL for the live server to test against",
+    )
+
+
 @pytest.fixture(scope="function")
-def live_server_url():
-    return os.environ.get("LIVE_SERVER_URL", "http://localhost:8000")
+def live_server_url(request):
+    return request.config.getoption("--live-server-url")
