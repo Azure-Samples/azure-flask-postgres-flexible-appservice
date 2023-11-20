@@ -96,4 +96,6 @@ jobs:
           env:
             URI: ${{needs.build.outputs.uri}}
           run: |
+            echo "Sleeping 1 minute due to https://github.com/Azure/azure-dev/issues/2669"
+            sleep 60
             curl -sSf $URI
