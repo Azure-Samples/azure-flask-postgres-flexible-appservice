@@ -19,7 +19,7 @@ permissions:
   
 jobs:
     build:
-      if: 0
+      if: 1
       runs-on: ubuntu-latest
       outputs:
         uri: ${{ steps.output.outputs.uri }}
@@ -90,10 +90,10 @@ jobs:
             echo "uri=$BACKEND_URI" >> "$GITHUB_OUTPUT"
     smoketests:
       runs-on: ubuntu-latest
-      needs: testoutputs
+      needs: build
       steps:
         - name: Smoke tests
           env:
-            URI: ${{needs.testoutputs.outputs.uri}}
+            URI: ${{needs.build.outputs.uri}}
           run: |
             curl -sSf $URI
