@@ -5,8 +5,8 @@ on:
     push:
       branches:
         - main
-        - smoketest
         - cruft/*
+    pull_request:
 
 # GitHub Actions workflow to deploy to Azure using azd
 # To configure required secrets for connecting to Azure, simply run `azd pipeline config`
