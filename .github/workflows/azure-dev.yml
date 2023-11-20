@@ -5,6 +5,7 @@ on:
     push:
       branches:
         - main
+        - smoketest
         - cruft/*
 
 # GitHub Actions workflow to deploy to Azure using azd
@@ -87,4 +88,3 @@ jobs:
             URI: ${{needs.build.outputs.uri}}
           run: |
             curl -sSf $URI
-          
