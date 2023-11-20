@@ -78,16 +78,6 @@ jobs:
             azd env get-values > .env
             source .env
             echo "uri=$BACKEND_URI" >> "$GITHUB_OUTPUT"
-    testoutputs:
-      runs-on: ubuntu-latest
-      outputs:
-        uri: ${{ steps.output.outputs.uri }}
-      steps:
-        - name: Output Deployment URI
-          id: output
-          run: |
-            export BACKEND_URI="https://az-fl-pgflex-appser-appsvc-web.azurewebsites.net/"
-            echo "uri=$BACKEND_URI" >> "$GITHUB_OUTPUT"
     smoketests:
       runs-on: ubuntu-latest
       needs: build
@@ -104,12 +94,12 @@ jobs:
         - name: Setup python
           uses: actions/setup-python@v4
           with:
-            python-version: 3.11
+            python-version: 3.12
         - name: End-to-end smoke tests (playwright)
           env:
             URI: ${{needs.build.outputs.uri}}
           run: |
             python3 -m pip install --upgrade pip
-            python3 -m pip install playwright
+            python3 -m pip install playwright pytest pytest-playwright
             python3 -m playwright install
-            python3 -m pytest src/tests/smoketests.py
+            python3 -m pytest --exitfirst src/tests/smoketests.py

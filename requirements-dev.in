@@ -5,9 +5,7 @@ cruft
 pip-tools
 
 # Testing Tools
-coverage
 pytest
-pytest-cov
 pytest-flask
 pytest-playwright
 

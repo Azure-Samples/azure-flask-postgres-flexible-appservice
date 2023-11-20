@@ -16,4 +16,3 @@ from .test_playwright import (
 @pytest.fixture(scope="function")
 def live_server_url():
     return os.environ.get("LIVE_SERVER_URL", "http://localhost:8000")
-
