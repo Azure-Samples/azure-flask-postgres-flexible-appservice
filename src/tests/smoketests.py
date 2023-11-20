@@ -1,7 +1,4 @@
 # ruff: noqa: F401
-
-import os
-
 import pytest
 
 # Import only the tests that we want to run for smoke testing
