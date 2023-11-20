@@ -8,7 +8,7 @@ from flaskapp import create_app, db, seeder
 
 
 @pytest.fixture(scope="session")
-def app():
+def app(request):
     """Session-wide test `Flask` application."""
     config_override = {
         "TESTING": True,
@@ -20,7 +20,7 @@ def app():
     with app.app_context():
         engines = db.engines
         db.create_all()
-        seeder.seed_data(db, pathlib.Path(__file__).parent.parent / "seed_data.json")
+        seeder.seed_data(db, pathlib.Path(__file__).parent.parent.parent / "seed_data.json")
 
     engine_cleanup = []
 
