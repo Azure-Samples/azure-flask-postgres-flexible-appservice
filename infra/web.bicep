@@ -62,3 +62,4 @@ module webKeyVaultAccess './core/security/keyvault-access.bicep' = {
 }
 
 output SERVICE_WEB_IDENTITY_PRINCIPAL_ID string = web.outputs.identityPrincipalId
+output uri string = web.outputs.uri
