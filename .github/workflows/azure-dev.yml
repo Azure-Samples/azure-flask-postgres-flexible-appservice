@@ -92,10 +92,24 @@ jobs:
       runs-on: ubuntu-latest
       needs: build
       steps:
-        - name: Smoke tests
+        - name: Basic smoke test (curl)
           env:
             URI: ${{needs.build.outputs.uri}}
           run: |
             echo "Sleeping 1 minute due to https://github.com/Azure/azure-dev/issues/2669"
             sleep 60
             curl -sSf $URI
+        - name: Checkout
+          uses: actions/checkout@v3
+        - name: Setup python
+          uses: actions/setup-python@v4
+          with:
+            python-version: 3.11
+        - name: End-to-end smoke tests (playwright)
+          env:
+            URI: ${{needs.build.outputs.uri}}
+          run: |
+            python3 -m pip install --upgrade pip
+            python3 -m pip install playwright
+            python3 -m playwright install
+            python3 -m pytest src/tests/smoketests.py
