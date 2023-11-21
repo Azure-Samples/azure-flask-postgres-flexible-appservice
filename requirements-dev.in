@@ -7,6 +7,7 @@ pip-tools
 # Testing Tools
 pytest
 pytest-playwright
+ephemeral-port-reserve
 
 # Linters
 ruff
