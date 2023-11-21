@@ -6,7 +6,6 @@ pip-tools
 
 # Testing Tools
 pytest
-pytest-flask
 pytest-playwright
 
 # Linters
