@@ -10,9 +10,7 @@ import requests
 from flaskapp import create_app, db, seeder
 
 
-def wait_for_server_ready(
-    url: str, timeout: float = 10.0, check_interval: float = 0.5
-) -> bool:
+def wait_for_server_ready(url: str, timeout: float = 10.0, check_interval: float = 0.5) -> bool:
     """Make requests to provided url until it responds without error."""
     conn_error = None
     for _ in range(int(timeout / check_interval)):
@@ -49,18 +47,14 @@ def live_server_url():
     config_override = {
         "TESTING": True,
         # Allows for override of database to separate test from dev environments
-        "SQLALCHEMY_DATABASE_URI": os.environ.get(
-            "TEST_DATABASE_URL", os.environ.get("DATABASE_URI")
-        ),
+        "SQLALCHEMY_DATABASE_URI": os.environ.get("TEST_DATABASE_URL", os.environ.get("DATABASE_URI")),
     }
     app = create_app(config_override)
 
     with app.app_context():
         engines = db.engines
         db.create_all()
-        seeder.seed_data(
-            db, pathlib.Path(__file__).parent.parent.parent / "seed_data.json"
-        )
+        seeder.seed_data(db, pathlib.Path(__file__).parent.parent.parent / "seed_data.json")
 
     engine_cleanup = []
     for key, engine in engines.items():
