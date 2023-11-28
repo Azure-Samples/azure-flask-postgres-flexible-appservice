@@ -6,6 +6,7 @@ on:
       branches:
         - main
         - cruft/*
+    pull_request:
 
 # GitHub Actions workflow to deploy to Azure using azd
 # To configure required secrets for connecting to Azure, simply run `azd pipeline config`
@@ -19,6 +20,8 @@ permissions:
 jobs:
     build:
       runs-on: ubuntu-latest
+      outputs:
+        uri: ${{ steps.output.outputs.uri }}
       env:
         AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
         AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
@@ -67,3 +70,39 @@ jobs:
             AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
             AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
             AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+        - name: Output Deployment URI
+          id: output
+          run: |
+            azd env get-values > .env
+            source .env
+            echo "uri=$BACKEND_URI" >> "$GITHUB_OUTPUT"
+
+    smoketests:
+      runs-on: ubuntu-latest
+      needs: build
+      steps:
+
+        - name: Basic smoke test (curl)
+          env:
+            URI: ${{needs.build.outputs.uri}}
+          run: |
+            echo "Sleeping 1 minute due to https://github.com/Azure/azure-dev/issues/2669"
+            sleep 60
+            curl -sSf $URI
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: Setup python
+          uses: actions/setup-python@v4
+          with:
+            python-version: 3.12
+
+        - name: End-to-end smoke tests (playwright)
+          env:
+            URI: ${{needs.build.outputs.uri}}
+          run: |
+            python3 -m pip install --upgrade pip
+            python3 -m pip install -r requirements-dev.in
+            python3 -m playwright install --with-deps
+            python3 -m pytest --exitfirst src/tests/smoke/smoketests.py --live-server-url $URI

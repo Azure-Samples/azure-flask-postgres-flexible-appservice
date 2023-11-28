@@ -26,7 +26,7 @@ def app_with_db():
     with app.app_context():
         engines = db.engines
         db.create_all()
-        seeder.seed_data(db, pathlib.Path(__file__).parent.parent / "seed_data.json")
+        seeder.seed_data(db, pathlib.Path(__file__).parent.parent.parent / "seed_data.json")
 
     engine_cleanup = []
 
