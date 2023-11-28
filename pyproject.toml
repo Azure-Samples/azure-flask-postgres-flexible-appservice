@@ -21,7 +21,4 @@ force-exclude = '''
 '''
 
 [tool.pytest.ini_options]
-addopts = "-ra --cov -vv"
-
-[tool.coverage.report]
-show_missing = true
+addopts = "-ra -vv"

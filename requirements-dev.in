@@ -5,10 +5,8 @@ cruft
 pip-tools
 
 # Testing Tools
-coverage
 pytest
-pytest-cov
-pytest-flask
+ephemeral-port-reserve
 pytest-playwright
 
 # Linters
