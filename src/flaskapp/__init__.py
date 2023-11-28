@@ -27,7 +27,7 @@ def create_app(test_config=None):
     if not is_prod_env:
         app.config.from_object("flaskapp.config.development")
     else:
-        app.config.from_object("flaskapp.config.production")  # pragma: no cover
+        app.config.from_object("flaskapp.config.production")
         FlaskMiddleware(
             app,
             exporter=AzureExporter(connection_string=os.environ.get("APPLICATIONINSIGHTS_CONNECTION_STRING", None)),

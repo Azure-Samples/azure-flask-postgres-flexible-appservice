@@ -1,14 +1,20 @@
 import os
 import pathlib
+from multiprocessing import Process
 
+import ephemeral_port_reserve
 import pytest
-from flask import url_for
+from flask import Flask
 
 from flaskapp import create_app, db, seeder
 
 
+def run_server(app: Flask, port: int):
+    app.run(port=port, debug=False)
+
+
 @pytest.fixture(scope="session")
-def app():
+def app_with_db():
     """Session-wide test `Flask` application."""
     config_override = {
         "TESTING": True,
@@ -38,7 +44,25 @@ def app():
         engines[key] = engine
 
 
-@pytest.fixture(scope="function")
-def live_server_url(app, live_server):
+@pytest.fixture(scope="session")
+def live_server_url(app_with_db):
     """Returns the url of the live server"""
-    return url_for("pages.index", _external=True)
+
+    # Start the process
+    hostname = ephemeral_port_reserve.LOCALHOST
+    free_port = ephemeral_port_reserve.reserve(hostname)
+    proc = Process(
+        target=run_server,
+        args=(
+            app_with_db,
+            free_port,
+        ),
+        daemon=True,
+    )
+    proc.start()
+
+    # Return the URL of the live server
+    yield f"http://{hostname}:{free_port}"
+
+    # Clean up the process
+    proc.kill()
