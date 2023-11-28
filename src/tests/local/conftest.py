@@ -19,9 +19,7 @@ def app_with_db():
     config_override = {
         "TESTING": True,
         # Allows for override of database to separate test from dev environments
-        "SQLALCHEMY_DATABASE_URI": os.environ.get(
-            "TEST_DATABASE_URL", os.environ.get("DATABASE_URI")
-        ),
+        "SQLALCHEMY_DATABASE_URI": os.environ.get("TEST_DATABASE_URL", os.environ.get("DATABASE_URI")),
     }
     app = create_app(config_override)
 
