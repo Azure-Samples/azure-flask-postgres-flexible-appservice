@@ -4,13 +4,13 @@ from multiprocessing import Process
 
 import ephemeral_port_reserve
 import pytest
+from flask import Flask
 
-from flaskapp import Flask, create_app, db, seeder
+from flaskapp import create_app, db, seeder
 
 
 def run_server(app: Flask, port: int):
     app.run(port=port, debug=False)
-
 
 
 @pytest.fixture(scope="session")
@@ -52,19 +52,19 @@ def live_server_url(app_with_db):
 
     # Start the process
     hostname = ephemeral_port_reserve.LOCALHOST
-    port = ephemeral_port_reserve.reserve(hostname)
+    free_port = ephemeral_port_reserve.reserve(hostname)
     proc = Process(
         target=run_server,
         args=(
             app_with_db,
-            port,
+            free_port,
         ),
         daemon=True,
     )
     proc.start()
 
     # Return the URL of the live server
-    yield f"http://{hostname}:{port}"
+    yield f"http://{hostname}:{free_port}"
 
     # Clean up the process
     proc.kill()
