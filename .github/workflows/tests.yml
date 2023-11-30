@@ -43,7 +43,7 @@ jobs:
           run: |
             python3 -m flask --app src.flaskapp db upgrade --directory src/flaskapp/migrations
             python3 -m flask --app src.flaskapp seed --filename src/seed_data.json
-            python3 -m pytest 
+            python3 -m pytest
           env:
             POSTGRES_HOST: localhost
             POSTGRES_USERNAME: postgres
