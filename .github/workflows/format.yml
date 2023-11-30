@@ -27,4 +27,4 @@ jobs:
         - name: Lint with ruff
           run: |
             ruff check .
-            ruff format.
+            ruff format .
