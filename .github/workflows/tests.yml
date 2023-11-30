@@ -36,7 +36,7 @@ jobs:
         - name: Install dependencies
           run: |
             python3 -m pip install --upgrade pip
-            python3 -m pip install -r requirements-dev.in
+            python3 -m pip install -r requirements-dev.txt
             playwright install --with-deps
             python3 -m pip install -e src
         - name: Seed data and run Pytest tests
