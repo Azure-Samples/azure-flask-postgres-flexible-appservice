@@ -79,7 +79,7 @@ module web 'web.bicep' = {
     applicationInsightsName: monitoring.outputs.applicationInsightsName
     keyVaultName: keyVault.outputs.name
     appCommandLine: 'entrypoint.sh'
-    pythonVersion: '3.12'
+    pythonVersion: '3.11'
     dbserverDomainName: db.outputs.dbserverDomainName
     dbserverUser: db.outputs.dbserverUser
     dbserverDatabaseName: db.outputs.dbserverDatabaseName
