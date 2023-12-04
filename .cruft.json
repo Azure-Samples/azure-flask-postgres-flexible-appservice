@@ -1,10 +1,11 @@
 {
   "template": "https://github.com/kjaymiller/cookiecutter-relecloud",
-  "commit": "b218511a76cea9f58de6f21c4bbe94a21d5a2b2f",
+  "commit": "9774534153c6e8eb131dd07567ca12f99c57a494",
   "checkout": "test-312",
   "context": {
     "cookiecutter": {
       "project_name": "azure",
+      "python_version": "3.12",
       "project_backend": "flask",
       "db_resource": "postgres-flexible",
       "project_host": "appservice",
