@@ -7,6 +7,12 @@
     
     <!--main CSS theme file  -->
     <link rel="stylesheet" href="{{ url_for('static', filename='res/css/theme.css') }}" />
+    <style>
+        /* Accessibility overrides */
+        .btn-primary {
+            background-color: #006ee5;
+        }
+    </style>
 
      <!-- For new browsers - multisize ico  -->
      <link rel="icon" type="image/x-icon" sizes="16x16 32x32" href="{{ url_for('static', filename='res/img/favicon.ico') }}">

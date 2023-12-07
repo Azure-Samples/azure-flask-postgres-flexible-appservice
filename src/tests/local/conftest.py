@@ -66,3 +66,21 @@ def live_server_url(app_with_db):
 
     # Clean up the process
     proc.kill()
+
+
+def pytest_addoption(parser):
+    parser.addoption(
+        "--playwright",
+        action="store_true",
+        default=False,
+        help="Enable end-to-end tests with Playwright",
+    )
+
+
+def pytest_runtest_setup(item):
+    print(item.config.args)
+    for marker in item.iter_markers(name="playwright"):
+        # item.config.args has the filename that was called
+        called_on_playwright_specifically = [arg for arg in item.config.args if "test_playwright.py" in arg]
+        if not item.config.getoption("--playwright") and not called_on_playwright_specifically:
+            pytest.skip("Skipping Playwright tests. Specify --playwright in order to run them.")

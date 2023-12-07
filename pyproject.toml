@@ -9,3 +9,9 @@ known-first-party = ["flaskapp"]
 
 [tool.pytest.ini_options]
 addopts = "-ra -vv"
+markers = [
+    "playwright: Slow E2E test that requires Playwright",
+]
+
+[tool.coverage.report]
+show_missing = true
