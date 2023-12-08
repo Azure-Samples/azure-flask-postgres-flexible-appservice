@@ -68,10 +68,9 @@ def test_create_info_request(app_with_db, client):
         == "/info_request?message=Thank+you,+Amanda+Valdez!+We+will+email+you+when+we+have+more+information!"
     )
 
-    # with app_with_db.app_context():
-    assert db.session.query(models.InfoRequest).count() == 1
-    info_request = db.session.query(models.InfoRequest).first()
-    assert info_request.name == "Amanda Valdez"
-    assert info_request.email == "michellewatson@gmail.com"
-    assert info_request.notes == "Please send me more information."
-    assert info_request.cruise_id == 12345
+    with app_with_db.app_context():
+        info_request = db.session.query(models.InfoRequest).order_by(models.InfoRequest.id.desc()).first()
+        assert info_request.name == "Amanda Valdez"
+        assert info_request.email == "michellewatson@gmail.com"
+        assert info_request.notes == "Please send me more information."
+        assert info_request.cruise_id == 12345

@@ -1,3 +1,4 @@
+import multiprocessing
 import os
 import pathlib
 from multiprocessing import Process
@@ -7,6 +8,8 @@ import pytest
 from flask import Flask
 
 from flaskapp import create_app, db, seeder
+
+multiprocessing.set_start_method("fork")
 
 
 def run_server(app: Flask, port: int):
@@ -78,7 +81,6 @@ def pytest_addoption(parser):
 
 
 def pytest_runtest_setup(item):
-    print(item.config.args)
     for marker in item.iter_markers(name="playwright"):
         # item.config.args has the filename that was called
         called_on_playwright_specifically = [arg for arg in item.config.args if "test_playwright.py" in arg]
