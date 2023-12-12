@@ -8,6 +8,8 @@ pip-tools
 pytest
 ephemeral-port-reserve
 pytest-playwright
+coverage
+pytest-cov
 
 # Linters
 ruff

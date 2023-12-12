@@ -44,14 +44,14 @@ def cruise_detail(pk: int):
     )
 
 
-@bp.get("/info_request/")
+@bp.get("/info_request")
 def info_request():
     all_cruises = db.session.execute(db.select(models.Cruise)).scalars().all()
 
     return render_template("info_request_create.html", cruises=all_cruises, message=request.args.get("message"))
 
 
-@bp.post("/info_request/")
+@bp.post("/info_request")
 def create_info_request():
     name = request.form["name"]
     db_info_request = models.InfoRequest(
