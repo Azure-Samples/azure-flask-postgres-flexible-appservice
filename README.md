@@ -46,7 +46,7 @@ export POSTGRES_PASSWORD=<YOUR PASSWORD>
 If you're running the app inside VS Code or GitHub Codespaces, you can use the "Run and Debug" button to start the app.
 
 ```sh
-python3 -m flask --app src.flaskapp run --reload --port=8000
+python3 -m flask --app src.flaskapp run --debug --reload --port=8000
 ```
 
 
@@ -56,7 +56,7 @@ python3 -m flask --app src.flaskapp run --reload --port=8000
 
     ```sh
     python3 -m pip install -r requirements-dev.txt
-    python3 -m playwright install --with-deps
+    python3 -m playwright install chromium --with-deps
     ```
 
 3. Run the tests:
