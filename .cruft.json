@@ -1,7 +1,7 @@
 {
   "template": "https://github.com/kjaymiller/cookiecutter-relecloud",
-  "commit": "114c8e267efd8eb827f54c056348df85109e95f7",
-  "checkout": "flasktests2",
+  "commit": "c8fa43e87b3fa4fafa5a1a718e3f81d377865247",
+  "checkout": null,
   "context": {
     "cookiecutter": {
       "project_name": "azure",
