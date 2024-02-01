@@ -1,12 +1,17 @@
+import multiprocessing
 import os
 import pathlib
-from multiprocessing import Process
+import sys
 
 import ephemeral_port_reserve
 import pytest
 from flask import Flask
 
 from flaskapp import create_app, db, seeder
+
+# Set start method to "fork" to avoid issues with pickling on OSes that default to "spawn"
+if sys.platform != "win32":
+    multiprocessing.set_start_method("fork")
 
 
 def run_server(app: Flask, port: int):
@@ -51,7 +56,7 @@ def live_server_url(app_with_db):
     # Start the process
     hostname = ephemeral_port_reserve.LOCALHOST
     free_port = ephemeral_port_reserve.reserve(hostname)
-    proc = Process(
+    proc = multiprocessing.Process(
         target=run_server,
         args=(
             app_with_db,
