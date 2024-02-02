@@ -1,4 +1,4 @@
-# Deploy Flask Application with PostgreSQL via Azure Container Apps
+# Deploy Flask Application with PostgreSQL via Azure App Service
 
 This project deploys a web application for a space travel agency using Flask. The application can be deployed to Azure with Azure App Service using the [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview).
 
