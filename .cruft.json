@@ -1,5 +1,5 @@
 {
-  "template": "https://github.com/kjaymiller/cookiecutter-relecloud",
+  "template": "https://github.com/Azure-Samples/Azure-Python-Standardization-Template-Generator",
   "commit": "a7ea908c4b190531faa473c98575da1b1ab3c7c1",
   "checkout": null,
   "context": {
@@ -26,7 +26,7 @@
         "lstrip_blocks": true,
         "trim_blocks": true
       },
-      "_template": "https://github.com/kjaymiller/cookiecutter-relecloud"
+      "_template": "https://github.com/Azure-Samples/Azure-Python-Standardization-Template-Generator"
     }
   },
   "directory": null
