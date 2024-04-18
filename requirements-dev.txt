@@ -10,6 +10,7 @@ ephemeral-port-reserve
 pytest-playwright
 coverage
 pytest-cov
+axe-playwright-python
 
 # Linters
 ruff
