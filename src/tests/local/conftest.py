@@ -8,6 +8,15 @@ from flask import Flask
 
 from flaskapp import create_app, db, seeder
 
+<<<<<<< ours
+=======
+# Set start method to "fork" to avoid issues with pickling on OSes that default to "spawn"
+if sys.platform == "win32":
+    multiprocessing.set_start_method("spawn", force=True)
+else:
+    multiprocessing.set_start_method("fork", force=True)
+
+>>>>>>> theirs
 
 def run_server(app: Flask, port: int):
     app.run(port=port, debug=False)
