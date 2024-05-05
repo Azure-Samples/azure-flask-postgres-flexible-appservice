@@ -1,7 +1,9 @@
+metadata description = 'Creates an Azure Cosmos DB account.'
 param name string
 param location string = resourceGroup().location
 param tags object = {}
 
+@secure()
 param connectionStringKey string = 'AZURE-COSMOS-CONNECTION-STRING'
 param keyVaultName string
 
@@ -25,7 +27,7 @@ resource cosmos 'Microsoft.DocumentDB/databaseAccounts@2022-08-15' = {
     databaseAccountOfferType: 'Standard'
     enableAutomaticFailover: false
     enableMultipleWriteLocations: false
-    apiProperties: (kind == 'MongoDB') ? { serverVersion: '4.0' } : {}
+    apiProperties: (kind == 'MongoDB') ? { serverVersion: '4.2' } : {}
     capabilities: [ { name: 'EnableServerless' } ]
   }
 }
