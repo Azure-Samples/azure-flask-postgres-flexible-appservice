@@ -24,6 +24,17 @@ var resourceToken = toLower(uniqueString(subscription().id, name, location))
 var prefix = '${name}-${resourceToken}'
 var tags = { 'azd-env-name': name }
 
+var secrets = [
+  {
+    name: 'DBSERVERPASSWORD'
+    value: dbserverPassword
+  }
+  {
+    name: 'SECRETKEY'
+    value: secretKey
+  }
+]
+
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   name: '${name}-rg'
   location: location
@@ -31,15 +42,57 @@ resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
 }
 
 // Store secrets in a keyvault
-module keyVault './core/security/keyvault.bicep' = {
+module keyVault 'br/public:avm/res/key-vault/vault:0.6.2' = {
   name: 'keyvault'
   scope: resourceGroup
   params: {
     name: '${take(replace(prefix, '-', ''), 17)}-vault'
     location: location
     tags: tags
-    principalId: principalId
-    logAnalyticsWorkspaceId: monitoring.outputs.logAnalyticsWorkspaceId
+    sku: 'standard'
+    enableRbacAuthorization: true
+    accessPolicies: [
+      {
+        objectId: principalId
+        permissions: { secrets: ['get', 'list'] }
+        tenantId: subscription().tenantId
+      }
+    ]
+    networkAcls: {
+      bypass: 'AzureServices'
+      defaultAction: 'Deny'
+    }
+    diagnosticSettings: [
+      {
+        logCategoriesAndGroups: [
+          {
+            category: 'AuditEvent'
+          }
+        ]
+        name: 'auditEventLogging'
+        workspaceResourceId: monitoring.outputs.logAnalyticsWorkspaceId
+      }
+    ]
+    secrets: [
+      for secret in secrets: {
+        name: secret.name
+        value: secret.value
+        tags: tags
+        attributes: {
+          exp: 0
+          nbf: 0
+        }
+      }
+    ]
+  }
+}
+
+module roleAssignment 'core/security/role.bicep' = {
+  name: 'webRoleAssignment'
+  scope: resourceGroup
+  params: {
+    principalId: web.outputs.SERVICE_WEB_IDENTITY_PRINCIPAL_ID
+    roleDefinitionId: '4633458b-17de-408a-b874-0445c86b69e6' // Key Vault Secrets User
   }
 }
 
@@ -87,32 +140,8 @@ module web 'web.bicep' = {
   }
 }
 
-var secrets = [
-  {
-    name: 'DBSERVERPASSWORD'
-    value: dbserverPassword
-  }
-  {
-    name: 'SECRETKEY'
-    value: secretKey
-  }
-]
-
-@batchSize(1)
-module keyVaultSecrets './core/security/keyvault-secret.bicep' = [
-  for secret in secrets: {
-    name: 'keyvault-secret-${secret.name}'
-    scope: resourceGroup
-    params: {
-      keyVaultName: keyVault.outputs.name
-      name: secret.name
-      secretValue: secret.value
-    }
-  }
-]
-
 output AZURE_LOCATION string = location
-output AZURE_KEY_VAULT_ENDPOINT string = keyVault.outputs.endpoint
+output AZURE_KEY_VAULT_ENDPOINT string = keyVault.outputs.uri
 output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APPLICATIONINSIGHTS_NAME string = monitoring.outputs.applicationInsightsName
 

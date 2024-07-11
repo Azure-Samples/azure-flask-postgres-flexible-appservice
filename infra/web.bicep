@@ -54,11 +54,12 @@ module web 'core/host/appservice.bicep' = {
 }
 
 // Give the app access to KeyVault
-module webKeyVaultAccess './core/security/keyvault-access.bicep' = {
+module webKeyVaultAccess './core/security/role.bicep' = {
   name: 'web-keyvault-access'
   params: {
-    keyVaultName: keyVaultName
     principalId: web.outputs.identityPrincipalId
+    principalType: 'ServicePrincipal'
+    roleDefinitionId: '00482a5a-887f-4fb3-b363-3b7fe8e74483'
   }
 }
 
