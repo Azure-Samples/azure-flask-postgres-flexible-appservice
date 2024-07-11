@@ -5,12 +5,10 @@ languages:
 - python
 - bicep
 - html
-- css
-- scss
 products:
 - azure
 - azure-app-service
-- azure-postgresql
+- azure-database-postgresql
 urlFragment: azure-flask-postgres-flexible-appservice
 name: Deploy Flask Application with PostgreSQL on Azure App Service (Python)
 description: This project deploys a web application for a space travel agency using Flask with Python, and is set up for easy deployment with the Azure Developer CLI.
